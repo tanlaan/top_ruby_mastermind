@@ -22,6 +22,7 @@ class Board
 
         # Hints  " |  1B 0W  |\n"
         board += " |  %dB %dW  |\n" % @hint
+        board += "\n"
 
     end
 

@@ -1,31 +1,42 @@
 def get_hint(secret, guess)
-    return [4,0] if secret == guess
-    black = 0
-    white = 0
-    guess.split('').each_with_index do | g, i|
+    # The logic for this function fails
+    # to account for a guess with multiple
+    # matching numbers, more than appear
+    # in the secret
+    # e.g.
+    # Guess = 1111 & Secret = 1234
+    # returns [1,3] not [1,0]
 
-        matched = false
-        secret.split('').each_with_index do | s, j |
-            # White or Black peg
-            if s == g
-                # Black peg
-                if j == i
-                    if matched
-                        white -= 1
-                    end
-                    black += 1
-                    matched = true
-                    
-                # White peg
-                else
-                    unless matched
-                        white += 1
-                        matched = true
+    return [4,0] if secret == guess
+    guesses = guess.split('')
+    secrets = secret.split('')
+    check_pegs(guesses, secrets)
+end
+
+def check_pegs(guesses, secrets)
+    hints = Array.new(4)
+    guesses.each_with_index do | g, i |
+        if g == secrets[i]
+            hints[i] = 'B'
+        else
+            secrets.each_with_index do | s, j |
+                if g == s
+                    if hints[j].nil?
+                        hints[j] = 'W'
+                        break
                     end
                 end
             end
         end
     end
+    peg_count(hints)
+end
 
-    return [black, white]
+def peg_count(hints)
+    pegs = Array.new(2, 0)
+    hints.each do | hint |
+        pegs[0] += 1 if hint == 'B'
+        pegs[1] += 1 if hint == 'W'
+    end
+    return pegs
 end
