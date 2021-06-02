@@ -5,10 +5,11 @@ require_relative './tui.rb'
 class Game
     attr_accessor :guess, :round
 
-    def initialize()
+    def initialize(secret=nil)
         @gameboard = Board.new()
         # Get the secret from computer or player later
-        @secret = "1234"
+        @secret = secret || get_secret()
+        
         @guess = ""
         @tries = 10
         @round = 1
@@ -35,7 +36,7 @@ class Game
         end
 
         print @gameboard
-        print "#{winner} wins!"
+        print "#{winner} wins!\n"
     end
 
     def winner

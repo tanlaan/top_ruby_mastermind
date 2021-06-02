@@ -40,3 +40,11 @@ def peg_count(hints)
     end
     return pegs
 end
+
+def get_secret
+    secret = ''
+    4.times do 
+        secret += (rand(6)+1).to_s
+    end
+    return secret
+end
