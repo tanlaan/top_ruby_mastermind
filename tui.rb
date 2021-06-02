@@ -41,3 +41,15 @@ def keep_playing?
     return true if valid_true.include? answer 
     return false if valid_false.include? answer
 end
+
+def welcome_message
+    puts "Welcome to Mastermind the cipher solving game!"
+    puts "The computer has chosen a 4 digit code for you to solve."
+    puts "The digits are from 1-6. A guess with correct numbers"
+    puts "in the correct place gets you a B. Correct numbers in the"
+    puts "wrong place give you a W. You've got 10 tries! Have fun!"
+end
+
+def exit_message
+    puts "Hope you had fun playing! See you next time!"
+end
