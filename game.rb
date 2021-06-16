@@ -1,15 +1,15 @@
 require_relative './board.rb'
 require_relative './game_logic.rb'
 require_relative './tui.rb'
+require_relative './computer.rb'
 
 class Game
     attr_accessor :guess, :round
 
-    def initialize(secret=nil)
+    def initialize(game_type)
         @gameboard = Board.new()
-        # Get the secret from computer or player later
-        @secret = secret || get_secret()
-        
+        @game_type = game_type || 'breaker'
+        @secret = get_secret
         @guess = ""
         @tries = 10
         @round = 1
@@ -22,7 +22,7 @@ class Game
             print @gameboard
 
             # Get the user's next guess
-            @guess = get_user_guess()
+            @guess = get_guess
 
             # Add our guess to the gameboard
             @gameboard.guesses += [@guess]
@@ -46,5 +46,15 @@ class Game
 
     def winner?
         !!winner
+    end
+
+    def get_secret
+        return computer_secret if @game_type == 'breaker'
+        human_secret
+    end
+
+    def get_guess
+        return computer_guess if @game_type == 'maker'
+        get_user_guess
     end
 end

@@ -9,7 +9,8 @@ playing = true
 welcome_message()
 
 while playing
-    game = Game.new
+    game_type = get_game_type
+    game = Game.new(game_type)
     game.start
     playing = keep_playing?
 end

@@ -14,6 +14,11 @@ def get_user_guess
     return guess
 end
 
+def human_secret
+    puts "What's the secret?"
+    get_user_guess
+end
+
 def valid_user_guess(guess)
     # Length of 4
     return false if guess.length != 4
@@ -52,4 +57,8 @@ end
 
 def exit_message
     puts "Hope you had fun playing! See you next time!"
+end
+
+def get_game_type
+    'maker'
 end
