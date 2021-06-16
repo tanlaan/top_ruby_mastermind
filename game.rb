@@ -9,6 +9,8 @@ class Game
     def initialize(game_type)
         @gameboard = Board.new()
         @game_type = game_type || 'breaker'
+        @maker   =   @game_type == 'maker'   ? 'Player' : 'Computer'
+        @breaker =   @game_type == 'breaker' ? 'Player' : 'Computer'
         @secret = get_secret
         @guess = ""
         @tries = 10
@@ -40,8 +42,8 @@ class Game
     end
 
     def winner
-        return 'Player' if @guess == @secret
-        return 'Computer' if @round > @tries
+        return @breaker if @guess == @secret
+        return @maker if @round > @tries
     end
 
     def winner?
