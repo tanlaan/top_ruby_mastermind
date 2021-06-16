@@ -33,18 +33,26 @@ def valid_user_guess(guess)
 end
 
 def keep_playing?
-    valid_answer = false
-    valid_true = ['yes', 'y']
-    valid_false = ['no', 'n']
-    valid_answers = valid_true + valid_false
     answer = ''
-    until valid_answer
+    until valid_answer?(answer)
         print "Do you want to play again?"
         answer = gets.chomp.downcase
-        valid_answer = true if valid_answers.include? answer
     end
-    return true if valid_true.include? answer 
-    return false if valid_false.include? answer
+    valid_true?(answer)
+end
+
+def valid_true?(word)
+    truthy = ['yes', 'y']
+    return truthy.include? word
+end
+
+def valid_false?(word)
+    falsy = ['no', 'n']
+    return falsy.include? word
+end
+
+def valid_answer?(word)
+    return valid_true(word) || valid_false(word)
 end
 
 def welcome_message
