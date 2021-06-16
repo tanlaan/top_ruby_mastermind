@@ -16,17 +16,9 @@ end
 def check_pegs(guesses, secrets)
     hints = Array.new(4)
     guesses.each_with_index do | g, i |
-        if g == secrets[i]
-            hints[i] = 'B'
-        else
-            secrets.each_with_index do | s, j |
-                if g == s
-                    if hints[j].nil?
-                        hints[j] = 'W'
-                        break
-                    end
-                end
-            end
+        hints[i] = 'B' and next if g == secrets[i] 
+        secrets.each_with_index do | s, j |
+            hints[j] = 'W' and break if g == s && hints[j].nil?
         end
     end
     peg_count(hints)
