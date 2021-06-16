@@ -33,9 +33,13 @@ def valid_user_guess(guess)
 end
 
 def keep_playing?
+    get_answer?("Do you want to play again?")
+end
+
+def get_answer?(message)
     answer = ''
     until valid_answer?(answer)
-        print "Do you want to play again?"
+        print message
         answer = gets.chomp.downcase
     end
     valid_true?(answer)
@@ -52,7 +56,7 @@ def valid_false?(word)
 end
 
 def valid_answer?(word)
-    return valid_true(word) || valid_false(word)
+    return valid_true?(word) || valid_false?(word)
 end
 
 def welcome_message
@@ -68,5 +72,7 @@ def exit_message
 end
 
 def get_game_type
-    'maker'
+    puts "Do you want to crack the code?"
+    puts "Yes = Break code, No = Make secret"
+    get_answer?(">") ? 'breaker' : 'maker'
 end
